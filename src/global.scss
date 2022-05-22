@@ -1,0 +1,42 @@
+@import "./animation.scss";
+
+:global(*) {
+  box-sizing: border-box;
+}
+
+:global(body) {
+  background-color: #030303;
+  color: #eee;
+  font: 300 16px/1.7 "Open Sans", sans-serif;
+  word-spacing: 0.05em;
+  letter-spacing: 0.015em;
+  padding: 0;
+}
+
+@media screen and (min-width: 768px) {
+  :global(body) {
+    // background-image: linear-gradient(to right, #101010, #030303 20%, #030303 80%, #101010);
+    font-size: 20px;
+    font-weight: 300;
+  }
+}
+
+:global(h1, h2) {
+  font: 2.75em/1 "Bebas Neue", Georgia, "Times New Roman", serif;
+  letter-spacing: 0.0333em;
+}
+
+:global(h1) {
+  background-image: linear-gradient(to bottom, white 44%, black);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+:global(h2) {
+  animation: rolling-color 10s linear infinite;
+  font-size: 2em;
+  position: relative;
+  padding-top: 0.2em;
+  padding-left: 25px;
+}
