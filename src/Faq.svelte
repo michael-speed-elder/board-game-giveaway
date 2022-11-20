@@ -1,4 +1,4 @@
-<h2>FAQ</h2>
+<h2>Q&A</h2>
 
 <details>
   <summary>I see a game I gave you on the list! What the hell?!</summary>
@@ -7,6 +7,10 @@
     a new board game is a joy above all others, and as I don't keep a public list of games
     somewhere, duplicates were inevitable. But fear not! I'm only giving away <em>someone else's</em
     > copy, not yours, the one that I love and treasure.
+  </p>
+  <p>
+    I've also had the pleasure to play many of these extensively at a different time in my life, and
+    I'm hoping they can bring other gamers as much joy as they've brought me over the years.
   </p>
 </details>
 
@@ -78,12 +82,21 @@
 <style lang="scss">
   summary {
     cursor: pointer;
+    transition: color 100ms linear;
+
+    [open] &,
+    &:hover {
+      color: orange;
+    }
   }
 
   details {
     margin-top: 0.5em;
+
     p {
       margin-left: 2em;
+      margin-bottom: 2em;
+      // font-weight: 400;
     }
   }
 </style>

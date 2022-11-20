@@ -1,16 +1,60 @@
 @import "./animation.scss";
 
+$global-max-width-sm: 62ch;
+$global-max-width-lg: 768px;
+
+$global-bg-color: #1e1e1e;
+$global-bg-color-alt: #101010;
+$global-link-color: orange;
+
+// :root {
+//   --page-content-width: calc(100vw - (100vw - 100%));
+//   --red: red;
+// }
+
 :global(*) {
   box-sizing: border-box;
 }
 
 :global(body) {
-  background-color: #030303;
-  color: #eee;
-  font: 300 16px/1.7 "Open Sans", sans-serif;
+  --page-content-width: calc(100vw - 100%);
+  --red: red;
+  // background-color: #030303;
+  background-color: $global-bg-color;
+  color: #ffe;
+  font: 300 16px/1.7 "Noto Sans", sans-serif;
   word-spacing: 0.05em;
   letter-spacing: 0.015em;
   padding: 0;
+  // overflow-x: hidden;
+}
+
+:global(.use-main-column-width) {
+  margin: 0 auto;
+  max-width: $global-max-width-lg;
+}
+
+:global(h1, h2) {
+  font: 400 2.25rem/1 Catamaran, Georgia, "Times New Roman", serif;
+  letter-spacing: 0.04em;
+  // word-spacing: 0.025em;
+}
+
+// :global(h1) {
+//   background-image: linear-gradient(to bottom, white 44%, black);
+//   background-clip: text;
+//   -webkit-background-clip: text;
+//   color: transparent;
+// }
+
+:global(h2) {
+  // animation: rolling-color 10s linear infinite;
+  font-size: 1.75rem;
+  line-height: 1.2;
+  position: relative;
+  padding-top: 0.2em;
+  // padding-left: 25px;
+  text-transform: uppercase;
 }
 
 @media screen and (min-width: 768px) {
@@ -19,24 +63,29 @@
     font-size: 20px;
     font-weight: 300;
   }
+
+  :global(h1) {
+    font-size: 2.75rem;
+  }
+
+  :global(h2) {
+    font-size: 2.25rem;
+  }
 }
 
-:global(h1, h2) {
-  font: 2.75em/1 "Bebas Neue", Georgia, "Times New Roman", serif;
-  letter-spacing: 0.0333em;
+:global(a) {
+  &,
+  &:visited,
+  &:hover,
+  &:active {
+    color: $global-link-color;
+  }
 }
 
-:global(h1) {
-  background-image: linear-gradient(to bottom, white 44%, black);
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
+:global(a.is-current) {
+  color: adjust-color($color: $global-link-color, $lightness: 30%);
 }
 
-:global(h2) {
-  animation: rolling-color 10s linear infinite;
-  font-size: 2em;
-  position: relative;
-  padding-top: 0.2em;
-  padding-left: 25px;
+:global(p + p) {
+  margin-top: 1.75rem;
 }

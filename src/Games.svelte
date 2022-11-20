@@ -8,16 +8,22 @@
 </script>
 
 <section>
+  <div class="use-main-column-width">
+    <Search />
+  </div>
+
+  <hr />
+
   {#if listOfGames === null}
     Loading...
   {:else if listOfGames.length}
-    <Search />
     <table>
       <thead>
         <tr>
           <th />
+          <th />
           <th>Name</th>
-          <th>Comment</th>
+          <!-- <th>Comment</th> -->
           <th>Min</th>
           <th>Max</th>
           <th />
@@ -25,11 +31,19 @@
       </thead>
       {#each listOfGames as game}
         <tr>
-          <td style={`--bg-img: url("${game.thumbnail}")`}>
+          <td class="badges">
+            {#if game.isNew}<span title="New/Unopened" />{/if}
+            {#if game.isExpansion}<span title="Expansion" />{/if}
+          </td>
+          <td class="image" style={`--bg-img: url("${game.thumbnail}")`}>
             <img src={game.thumbnail} alt={`Thumbnail of ${game.name}`} />
           </td>
-          <td>{game.name}</td>
-          <td>{game.comment ?? ""}</td>
+          <td class="game-info">
+            <h3>{game.name}</h3>
+            <p>{game.comment ?? ""}</p>
+          </td>
+          <!-- <td>{game.name}</td>
+          <td>{game.comment ?? ""}</td> -->
           <td>{game.min}</td>
           <td>{game.max}</td>
           <td>
@@ -45,10 +59,24 @@
   {/if}
 </section>
 
-<style>
+<style lang="scss">
+  @import "./global.scss";
+
   section {
     max-width: 1200px;
     margin: 2pc auto;
+  }
+
+  hr {
+    border: none;
+    height: 1px;
+    background-image: repeating-linear-gradient(
+      to right,
+      #fff9 0px,
+      #fff9 10px,
+      transparent 10px,
+      transparent 20px
+    );
   }
 
   table {
@@ -56,17 +84,60 @@
   }
 
   tr:nth-child(2n) {
-    background-color: black;
+    background-color: $global-bg-color-alt;
   }
 
-  td:first-child {
+  td.badges {
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0 0.5rem;
+
+    [title]::before {
+      // content: attr(title);
+      content: "";
+      display: block;
+      height: 1em;
+      width: 1em;
+      padding: 0.25em;
+      border: 0px solid gray;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-family: Georgia, serif;
+      text-align: center;
+      line-height: 1;
+    }
+
+    [title^="N"]::before {
+      background-color: #396;
+      // background-image: linear-gradient(to bottom right, adjust-color(#396, $lightness: 10%), #396);
+      border-color: adjust-color(#396, $lightness: -25%);
+      color: adjust-color(#396, $lightness: -25%);
+    }
+
+    [title^="E"]::before {
+      background-color: #fc3;
+      // background-image: linear-gradient(
+      //   to bottom right,
+      //   adjust-color(#fc3, $lightness: 15%),
+      //   adjust-color(#fc3, $lightness: -15%)
+      // );
+      border-color: adjust-color(#fc3, $lightness: -25%);
+      color: adjust-color(#fc3, $lightness: -25%);
+    }
+
+    [title] + [title]::before {
+      margin-top: 1rem;
+    }
+  }
+
+  td.image {
     position: relative;
     overflow: hidden;
     text-align: center;
     font-size: 0;
   }
 
-  td:first-child::after {
+  td.image::after {
     content: "";
 
     position: absolute;
@@ -75,6 +146,25 @@
     background-size: cover;
     background-position: center;
     filter: blur(2px) brightness(50%);
+  }
+
+  td.game-info {
+    display: grid;
+
+    h3 {
+      font-weight: 400;
+      line-height: 1.333;
+    }
+
+    p {
+      filter: opacity(0.9);
+      margin-top: 1rem;
+      line-height: 1.333;
+    }
+
+    > * {
+      margin: 0;
+    }
   }
 
   td + td,
