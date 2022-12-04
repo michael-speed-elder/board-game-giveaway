@@ -66,6 +66,5 @@ $global-max-width-lg: calc(#{$breakpoint-lg} - 4rem);
 }
 
 :global(p + p) {
-  //
   margin-top: 1.75rem;
 }
