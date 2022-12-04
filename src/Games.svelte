@@ -47,7 +47,12 @@
           <td>{game.min}</td>
           <td>{game.max}</td>
           <td>
-            <a href={`https://boardgamegeek.com/boardgame/${game.id}`} title="Board Game Geek">
+            <a
+              href={`https://boardgamegeek.com/boardgame/${game.id}`}
+              title="Board Game Geek"
+              target="_blank"
+              rel="noreferrer"
+            >
               ↗ BGG
             </a>
           </td>
@@ -55,12 +60,21 @@
       {/each}
     </table>
   {:else}
-    Server error, try again later.
+    <div class="spinner" />
   {/if}
 </section>
 
 <style lang="scss">
-  @import "./global.scss";
+  @import "./styles/global.scss";
+
+  .spinner {
+    animation: pulse-border 1s linear infinite;
+    border: 0 solid skyblue;
+    border-radius: 100%;
+    margin: 5pc auto 0;
+    height: 100px;
+    width: 100px;
+  }
 
   section {
     max-width: 1200px;
@@ -70,6 +84,7 @@
   hr {
     border: none;
     height: 1px;
+    margin-top: 2rem;
     background-image: repeating-linear-gradient(
       to right,
       #fff9 0px,
@@ -81,6 +96,7 @@
 
   table {
     border-spacing: 0 1ch;
+    width: 100%;
   }
 
   tr:nth-child(2n) {
