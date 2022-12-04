@@ -32,18 +32,18 @@
 </Router>
 
 <style lang="scss">
-  @import "./global.scss";
+  @import "./styles/global.scss";
 
   main {
     padding: 2vh 2ch;
   }
 
   header {
-    max-width: $global-max-width-lg;
+    max-width: $global-max-width-sm;
     margin: 0 auto;
   }
 
-  @media screen and (min-width: $global-max-width-lg) {
+  @media screen and (min-width: $breakpoint-lg) {
     main {
       padding: 5vh 0;
     }
@@ -62,7 +62,7 @@
       font-weight: 400;
       letter-spacing: normal;
 
-      @media screen and (min-width: $global-max-width-lg) {
+      @media screen and (min-width: $breakpoint-lg) {
         font-size: 1.5rem;
       }
     }
