@@ -1,0 +1,43 @@
+@import "./colors.scss";
+
+@keyframes rolling-color {
+  @for $deg from 0 through 10 {
+    #{$deg * 10%} {
+      border-left: 10px solid hsl(36 * $deg, 100, 50);
+    }
+  }
+}
+
+$border-anim-max-size: 10px;
+$border-anim-min-size: 1px;
+
+@keyframes pulse-border {
+  0% {
+    font-size: 0;
+    border-color: $global-link-color;
+    border-left-width: $border-anim-min-size;
+    border-top-width: $border-anim-max-size;
+  }
+
+  25% {
+    border-top-width: $border-anim-min-size;
+    border-right-width: $border-anim-max-size;
+  }
+
+  50% {
+    border-right-width: $border-anim-min-size;
+    border-bottom-width: $border-anim-max-size;
+    border-color: $link-hover-color;
+  }
+
+  75% {
+    border-bottom-width: $border-anim-min-size;
+    border-left-width: $border-anim-max-size;
+  }
+
+  100% {
+    border-color: $global-link-color;
+    border-left-width: $border-anim-min-size;
+    border-top-width: $border-anim-max-size;
+  }
+}

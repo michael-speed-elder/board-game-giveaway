@@ -1,0 +1,7 @@
+$global-bg-color: #1e1e1e;
+$global-bg-color-alt: #101010;
+$global-link-color: orange;
+$link-hover-color: adjust-color(
+  $color: $global-link-color,
+  $lightness: 30%,
+);

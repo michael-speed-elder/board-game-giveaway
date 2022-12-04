@@ -1,32 +1,22 @@
 @import "./animation.scss";
+@import "./colors.scss";
+
+$breakpoint-lg: 900px;
 
 $global-max-width-sm: 62ch;
-$global-max-width-lg: 768px;
+$global-max-width-lg: calc(#{$breakpoint-lg} - 4rem);
 
-$global-bg-color: #1e1e1e;
-$global-bg-color-alt: #101010;
-$global-link-color: orange;
-
-// :root {
-//   --page-content-width: calc(100vw - (100vw - 100%));
-//   --red: red;
-// }
-
-:global(*) {
+:global(*, *::before, *::after) {
   box-sizing: border-box;
 }
 
 :global(body) {
-  --page-content-width: calc(100vw - 100%);
-  --red: red;
-  // background-color: #030303;
   background-color: $global-bg-color;
   color: #ffe;
   font: 300 16px/1.7 "Noto Sans", sans-serif;
   word-spacing: 0.05em;
   letter-spacing: 0.015em;
   padding: 0;
-  // overflow-x: hidden;
 }
 
 :global(.use-main-column-width) {
@@ -37,29 +27,18 @@ $global-link-color: orange;
 :global(h1, h2) {
   font: 400 2.25rem/1 Catamaran, Georgia, "Times New Roman", serif;
   letter-spacing: 0.04em;
-  // word-spacing: 0.025em;
 }
 
-// :global(h1) {
-//   background-image: linear-gradient(to bottom, white 44%, black);
-//   background-clip: text;
-//   -webkit-background-clip: text;
-//   color: transparent;
-// }
-
 :global(h2) {
-  // animation: rolling-color 10s linear infinite;
   font-size: 1.75rem;
   line-height: 1.2;
   position: relative;
   padding-top: 0.2em;
-  // padding-left: 25px;
   text-transform: uppercase;
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: $breakpoint-lg) {
   :global(body) {
-    // background-image: linear-gradient(to right, #101010, #030303 20%, #030303 80%, #101010);
     font-size: 20px;
     font-weight: 300;
   }

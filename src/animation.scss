@@ -1,7 +1,0 @@
-@keyframes rolling-color {
-  @for $deg from 0 through 10 {
-    #{$deg * 10%} {
-      border-left: 10px solid hsl(36 * $deg, 100, 50);
-    }
-  }
-}
