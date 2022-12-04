@@ -6,6 +6,7 @@ export interface Game {
   comment: string;
   isNew: boolean;
   isExpansion: boolean;
+  isHidden: boolean;
   min: number;
   max: number;
 }
@@ -45,10 +46,12 @@ const normalize = (item: Element) => ({
 const parseTags = (game: Game): Game => {
   const isNew = game.comment?.includes("[new]");
   const isExpansion = game.comment?.includes("[expansion]");
+  const isHidden = game.comment?.includes("[hide]");
 
   game.comment = game.comment?.replaceAll(/\[\w+\]/g, "") ?? "";
   game.isNew = !!isNew;
   game.isExpansion = !!isExpansion;
+  game.isHidden = !!isHidden;
 
   return game;
 };
