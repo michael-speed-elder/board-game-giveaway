@@ -21,9 +21,9 @@ export const fetchData = async (): Promise<Element> => {
   if (res.status === 200) {
     return new DOMParser().parseFromString(await res.text(), "application/xml").documentElement;
   } else if (res.status === 202) {
-    // BGG servers warming up, try again in 4s
+    // BGG servers warming up, try again in 3s
     return new Promise((res) => {
-      setTimeout(() => res(fetchData()), 4000);
+      setTimeout(() => res(fetchData()), 3000);
     });
   } else {
     return document.createElement("div");
