@@ -1,13 +1,12 @@
 <script lang="ts">
-  // import LabelledRadio from "./LabelledRadio.svelte";
-  import { maxPlayers, minPlayers, onlyNew, searchText } from "./stores/filters";
-
-  // export let min: number = 1;
-  // export let max: number = 10;
-  // export let step: number = 1;
-
-  // let minVal = min;
-  // let maxVal = max;
+  import {
+    ExpansionFilter,
+    expansions,
+    maxPlayers,
+    minPlayers,
+    onlyNew,
+    searchText,
+  } from "./stores/filters";
 </script>
 
 <div class="filter">
@@ -30,19 +29,30 @@
   <input type="number" min="1" id="max-players" bind:value={$maxPlayers} />
 </div>
 
-<!-- <div class="control">
-  <div class="min-thumb" />
-  <div class="max-thumb" />
-  < !-- <input type="range" data-min {min} max={max - 1} {step} value={min} />
-  <input type="range" data-max min={min + 1} {max} {step} value={max} /> -- >
-  {#each { length: max } as _}
-    <LabelledRadio name="min" />
-    <LabelledRadio name="max" />
-  {/each}
-</div> -->
+<div class="filter">
+  Expansions:
+  <label>
+    <input type="radio" name="expansions" value={ExpansionFilter.ALLOW} bind:group={$expansions} />
+    Allow
+  </label>
+  <label>
+    <input type="radio" name="expansions" value={ExpansionFilter.NONE} bind:group={$expansions} />
+    None
+  </label>
+  <label>
+    <input type="radio" name="expansions" value={ExpansionFilter.ONLY} bind:group={$expansions} />
+    Only
+  </label>
+</div>
+
 <style lang="scss">
   input:not([type]) {
+    // the big text search bar
     width: 100%;
+  }
+
+  .filter + .filter {
+    margin-top: 1rem;
   }
 
   .inline-filter {
@@ -67,21 +77,8 @@
     color: white;
   }
 
-  // .control {
-  //   position: relative;
-  // }
-
-  // input {
-  //   position: absolute;
-  //   inset: 0;
-  // }
-
-  // [data-min] {
-  //   writing-mode: rl;
-  //   right: 5%;
-  // }
-
-  // [data-max] {
-  //   left: 5%;
-  // }
+  label:has(input[type="radio"]) {
+    display: inline-block;
+    margin-left: 2ch;
+  }
 </style>
