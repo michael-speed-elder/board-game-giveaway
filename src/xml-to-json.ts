@@ -9,6 +9,7 @@ export interface Game {
   isHidden: boolean;
   min: number;
   max: number;
+  owned: boolean;
 }
 
 export const NEW_UNOPENED = "New/Unopened";
@@ -41,6 +42,7 @@ const normalize = (item: Element) => ({
   comment: item.querySelector("comment")?.textContent,
   max: parseInt(item.querySelector("stats").getAttribute("maxplayers"), 10),
   min: parseInt(item.querySelector("stats").getAttribute("minplayers"), 10),
+  owned: parseInt(item.querySelector("status").getAttribute("own"), 10) === 1,
 });
 
 const parseTags = (game: Game): Game => {
@@ -51,7 +53,7 @@ const parseTags = (game: Game): Game => {
   game.comment = game.comment?.replaceAll(/\[\w+\]/g, "") ?? "";
   game.isNew = !!isNew;
   game.isExpansion = !!isExpansion;
-  game.isHidden = !!isHidden;
+  game.isHidden = !game.owned || !!isHidden;
 
   return game;
 };
