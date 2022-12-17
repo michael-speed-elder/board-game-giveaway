@@ -1,7 +1,9 @@
 <script lang="ts">
   import type { Game } from "./xml-to-json";
   import { games } from "./stores/games";
+
   import Search from "./Search.svelte";
+  import GameDetail from "./GameDetail.svelte";
 
   let listOfGames: Game[];
   $: listOfGames = $games;
@@ -15,15 +17,19 @@
   <hr />
 
   {#if listOfGames === null}
-    Loading...
+    <div class="spinner" />
   {:else if listOfGames.length}
-    <table>
+    <div class="mobile-size">
+      {#each listOfGames as game}
+        <GameDetail {game} />
+      {/each}
+    </div>
+
+    <table class="desktop-size">
       <thead>
         <tr>
           <th />
-          <th />
           <th>Name</th>
-          <!-- <th>Comment</th> -->
           <th>Min</th>
           <th>Max</th>
           <th />
@@ -31,19 +37,17 @@
       </thead>
       {#each listOfGames as game}
         <tr>
-          <td class="badges">
-            {#if game.isNew}<span title="New/Unopened" />{/if}
-            {#if game.isExpansion}<span title="Expansion" />{/if}
-          </td>
           <td class="image" style={`--bg-img: url("${game.thumbnail}")`}>
             <img src={game.thumbnail} alt={`Thumbnail of ${game.name}`} />
           </td>
           <td class="game-info">
             <h3>{game.name}</h3>
-            <p>{game.comment ?? ""}</p>
+            <p class="pills">
+              {#if game.isNew}<span title="Unopened">unopened</span>{/if}
+              {#if game.isExpansion}<span title="Expansion">expansion</span>{/if}
+            </p>
+            <p class="comment">{game.comment ?? ""}</p>
           </td>
-          <!-- <td>{game.name}</td>
-          <td>{game.comment ?? ""}</td> -->
           <td>{game.min}</td>
           <td>{game.max}</td>
           <td>
@@ -60,12 +64,30 @@
       {/each}
     </table>
   {:else}
-    <div class="spinner" />
+    <p class="no-results">
+      Looks like there's nothing that fits what you're looking for.<br /><br />Try removing some
+      search terms!
+    </p>
   {/if}
 </section>
 
 <style lang="scss">
   @import "./styles/global.scss";
+  @import "./styles/pills.scss";
+
+  .desktop-size {
+    display: none;
+  }
+
+  @media screen and (min-width: $global-max-width-sm) {
+    .mobile-size {
+      display: none;
+    }
+
+    .desktop-size {
+      display: table;
+    }
+  }
 
   .spinner {
     animation: pulse-border 1s linear infinite;
@@ -94,55 +116,22 @@
     );
   }
 
+  .no-results {
+    margin: 5vh auto 0;
+    max-width: 80%;
+  }
+
   table {
     border-spacing: 0 1ch;
     width: 100%;
   }
 
-  tr:nth-child(2n) {
-    background-color: $global-bg-color-alt;
-  }
+  tr {
+    --bg-color: #{$global-bg-color};
 
-  td.badges {
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 0 0.5rem;
-
-    [title]::before {
-      // content: attr(title);
-      content: "";
-      display: block;
-      height: 1em;
-      width: 1em;
-      padding: 0.25em;
-      border: 0px solid gray;
-      border-radius: 999px;
-      font-size: 0.8rem;
-      font-family: Georgia, serif;
-      text-align: center;
-      line-height: 1;
-    }
-
-    [title^="N"]::before {
-      background-color: #396;
-      // background-image: linear-gradient(to bottom right, adjust-color(#396, $lightness: 10%), #396);
-      border-color: adjust-color(#396, $lightness: -25%);
-      color: adjust-color(#396, $lightness: -25%);
-    }
-
-    [title^="E"]::before {
-      background-color: #fc3;
-      // background-image: linear-gradient(
-      //   to bottom right,
-      //   adjust-color(#fc3, $lightness: 15%),
-      //   adjust-color(#fc3, $lightness: -15%)
-      // );
-      border-color: adjust-color(#fc3, $lightness: -25%);
-      color: adjust-color(#fc3, $lightness: -25%);
-    }
-
-    [title] + [title]::before {
-      margin-top: 1rem;
+    &:nth-child(2n) {
+      --bg-color: #{$global-bg-color-dark};
+      background-color: $global-bg-color-dark;
     }
   }
 
@@ -173,9 +162,20 @@
     }
 
     p {
+      font-size: smaller;
+    }
+
+    p.pills {
+      @extend %pills;
+      margin-top: 0.25em;
+      filter: opacity(0.9);
+    }
+
+    p.comment {
       filter: opacity(0.9);
       margin-top: 1rem;
       line-height: 1.333;
+      white-space: pre-wrap;
     }
 
     > * {

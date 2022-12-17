@@ -1,0 +1,23 @@
+%pills {
+  [title="Expansion"],
+  [title="Unopened"] {
+    align-self: start;
+    border-radius: 999px;
+    color: var(--bg-color);
+    display: inline-flex;
+    font-size: smaller;
+    font-weight: bold;
+    line-height: 1.5;
+    justify-content: center;
+    justify-self: self-start;
+    padding: 0 1ch;
+  }
+
+  [title="Expansion"] {
+    background-color: #f3c435;
+  }
+
+  [title="Unopened"] {
+    background-color: #b9ff48;
+  }
+}
