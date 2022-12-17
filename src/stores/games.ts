@@ -24,25 +24,25 @@ export const games = derived(
     // const [games, maxPlayers, minPlayers, onlyNew, searchText] = $filters;
     // console.log($games, $maxPlayers, $minPlayers, $onlyNew, $searchText);
 
-    return (
-      $games
-        ?.filter((game) => !game.isHidden)
-        ?.filter((game) => game.max <= $maxPlayers)
-        ?.filter((game) => game.min >= $minPlayers)
-        ?.filter((game) => ($onlyNew ? game.isNew : true))
-        ?.filter((game) => {
-          switch ($expansions) {
-            case ExpansionFilter.ALLOW:
-              return true;
-            case ExpansionFilter.ONLY:
-              return game.isExpansion;
-            case ExpansionFilter.NONE:
-              return !game.isExpansion;
-          }
-        })
-        ?.filter((game) =>
-          `${game.name} ${game.comment}`.toLowerCase().includes($searchText.toLowerCase())
-        ) ?? []
-    );
+    if ($games === null) return $games;
+
+    return $games
+      .filter((game) => !game.isHidden)
+      .filter((game) => game.max <= $maxPlayers)
+      .filter((game) => game.min >= $minPlayers)
+      .filter((game) => ($onlyNew ? game.isNew : true))
+      .filter((game) => {
+        switch ($expansions) {
+          case ExpansionFilter.ALLOW:
+            return true;
+          case ExpansionFilter.ONLY:
+            return game.isExpansion;
+          case ExpansionFilter.NONE:
+            return !game.isExpansion;
+        }
+      })
+      .filter((game) =>
+        `${game.name} ${game.comment}`.toLowerCase().includes($searchText.toLowerCase())
+      );
   }
 );
