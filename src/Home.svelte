@@ -61,7 +61,7 @@
     max-width: var(--max-section-width);
 
     &.stripe {
-      background-color: $global-bg-color-alt;
+      background-color: $global-bg-color-dark;
       margin-left: -2ch;
       margin-right: -2ch;
       padding: 2ch;
