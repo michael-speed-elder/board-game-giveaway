@@ -64,7 +64,3 @@ $global-max-width-lg: calc(#{$breakpoint-lg} - 4rem);
 :global(a.is-current) {
   color: adjust-color($color: $global-link-color, $lightness: 30%);
 }
-
-:global(p + p) {
-  margin-top: 1.75rem;
-}
