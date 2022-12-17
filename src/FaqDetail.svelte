@@ -34,5 +34,9 @@
     &:hover {
       color: orange;
     }
+
+    &::marker {
+      font-size: smaller;
+    }
   }
 </style>
