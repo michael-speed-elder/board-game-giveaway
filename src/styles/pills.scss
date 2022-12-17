@@ -6,11 +6,11 @@
     color: var(--bg-color);
     display: inline-flex;
     font-size: smaller;
-    font-weight: bold;
     line-height: 1.5;
     justify-content: center;
     justify-self: self-start;
     padding: 0 1ch;
+    text-shadow: 0 0 0 var(--bg-color);
   }
 
   [title="Expansion"] {
