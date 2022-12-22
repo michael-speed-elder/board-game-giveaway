@@ -18,6 +18,9 @@
       <div class="pills">
         {#if game.isNew}<span title="Unopened">unopened</span>{/if}
         {#if game.isExpansion}<span title="Expansion">expansion</span>{/if}
+        {#if game.isPortable}
+          <span title="Portable - easy to put in a pocket or purse">portable</span>
+        {/if}
       </div>
       <a
         href={`https://boardgamegeek.com/boardgame/${game.id}`}

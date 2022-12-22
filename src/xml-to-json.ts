@@ -7,6 +7,7 @@ export interface Game {
   isNew: boolean;
   isExpansion: boolean;
   isHidden: boolean;
+  isPortable: boolean;
   min: number;
   max: number;
   owned: boolean;
@@ -49,11 +50,13 @@ const parseTags = (game: Game): Game => {
   const isNew = game.comment?.includes("[new]");
   const isExpansion = game.comment?.includes("[expansion]");
   const isHidden = game.comment?.includes("[hide]");
+  const isPortable = game.comment?.includes("[portable]");
 
   game.comment = game.comment?.replaceAll(/\[\w+\]/g, "") ?? "";
   game.isNew = !!isNew;
   game.isExpansion = !!isExpansion;
   game.isHidden = !game.owned || !!isHidden;
+  game.isPortable = !!isPortable;
 
   return game;
 };

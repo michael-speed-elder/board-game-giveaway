@@ -2,12 +2,14 @@ import { derived, readable } from "svelte/store";
 import { fetchData, xml2json } from "../xml-to-json";
 import type { Game } from "../xml-to-json";
 import {
-  ExpansionFilter,
+  FilterVisibility,
   expansions,
   maxPlayers,
   minPlayers,
   onlyNew,
   searchText,
+  filterByVisibility,
+  portability,
 } from "./filters";
 
 const initStore = async () => {
@@ -19,8 +21,8 @@ export const allGames = readable<Game[]>(null, (set) => {
 });
 
 export const games = derived(
-  [allGames, expansions, maxPlayers, minPlayers, onlyNew, searchText],
-  ([$games, $expansions, $maxPlayers, $minPlayers, $onlyNew, $searchText]) => {
+  [allGames, expansions, maxPlayers, minPlayers, onlyNew, portability, searchText],
+  ([$games, $expansions, $maxPlayers, $minPlayers, $onlyNew, $portability, $searchText]) => {
     // const [games, maxPlayers, minPlayers, onlyNew, searchText] = $filters;
     // console.log($games, $maxPlayers, $minPlayers, $onlyNew, $searchText);
 
@@ -31,16 +33,8 @@ export const games = derived(
       .filter((game) => game.max <= $maxPlayers)
       .filter((game) => game.min >= $minPlayers)
       .filter((game) => ($onlyNew ? game.isNew : true))
-      .filter((game) => {
-        switch ($expansions) {
-          case ExpansionFilter.ALLOW:
-            return true;
-          case ExpansionFilter.ONLY:
-            return game.isExpansion;
-          case ExpansionFilter.NONE:
-            return !game.isExpansion;
-        }
-      })
+      .filter((game) => filterByVisibility(game, $expansions, "isExpansion"))
+      .filter((game) => filterByVisibility(game, $portability, "isPortable"))
       .filter((game) =>
         `${game.name} ${game.comment}`.toLowerCase().includes($searchText.toLowerCase())
       );
