@@ -1,4 +1,5 @@
 %pills {
+  [title^="Portable"],
   [title="Expansion"],
   [title="Unopened"] {
     align-self: start;
@@ -19,5 +20,9 @@
 
   [title="Unopened"] {
     background-color: #b9ff48;
+  }
+
+  [title^="Portable"] {
+    background-color: #c989d6;
   }
 }

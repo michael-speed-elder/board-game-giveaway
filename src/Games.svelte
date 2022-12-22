@@ -72,8 +72,8 @@
 </section>
 
 <style lang="scss">
-  @import "./styles/global.scss";
-  @import "./styles/pills.scss";
+  @import "styles/global";
+  @import "styles/pills";
 
   .desktop-size {
     display: none;

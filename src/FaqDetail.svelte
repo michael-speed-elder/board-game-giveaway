@@ -10,7 +10,7 @@
 </details>
 
 <style lang="scss">
-  @import "./styles/colors.scss";
+  @import "styles/colors";
 
   details {
     margin-top: 0.5em;

@@ -52,7 +52,7 @@
 </section>
 
 <style lang="scss">
-  @import "./styles/global.scss";
+  @import "styles/global";
 
   section {
     --max-section-width: 62ch;

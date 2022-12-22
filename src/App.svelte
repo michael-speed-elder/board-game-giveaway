@@ -32,7 +32,7 @@
 </Router>
 
 <style lang="scss">
-  @import "./styles/global.scss";
+  @import "styles/global";
 
   main {
     padding: 2vh 2ch;

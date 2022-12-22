@@ -34,8 +34,8 @@
 </details>
 
 <style lang="scss">
-  @import "./styles/colors.scss";
-  @import "./styles/pills.scss";
+  @import "styles/colors";
+  @import "styles/pills";
 
   .game-details {
     --bg-color: #{$global-bg-color};
