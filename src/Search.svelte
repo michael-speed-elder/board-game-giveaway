@@ -32,49 +32,70 @@
 
 <div class="filter">
   Expansions:
-  <label>
-    <input type="radio" name="expansions" value={FilterVisibility.ALLOW} bind:group={$expansions} />
-    Allow
-  </label>
-  <label>
-    <input type="radio" name="expansions" value={FilterVisibility.NONE} bind:group={$expansions} />
-    None
-  </label>
-  <label>
-    <input type="radio" name="expansions" value={FilterVisibility.ONLY} bind:group={$expansions} />
-    Only
-  </label>
+
+  <span class="dib">
+    <label>
+      <input
+        type="radio"
+        name="expansions"
+        value={FilterVisibility.ALLOW}
+        bind:group={$expansions}
+      />
+      Allow
+    </label>
+    <label>
+      <input
+        type="radio"
+        name="expansions"
+        value={FilterVisibility.NONE}
+        bind:group={$expansions}
+      />
+      None
+    </label>
+    <label>
+      <input
+        type="radio"
+        name="expansions"
+        value={FilterVisibility.ONLY}
+        bind:group={$expansions}
+      />
+      Only
+    </label>
+  </span>
 </div>
 
 <div class="filter">
   <span title="easy to put into a pocket or purse">Portable</span>:
-  <label>
-    <input
-      type="radio"
-      name="portability"
-      value={FilterVisibility.ALLOW}
-      bind:group={$portability}
-    />
-    Allow
-  </label>
-  <label>
-    <input
-      type="radio"
-      name="portability"
-      value={FilterVisibility.NONE}
-      bind:group={$portability}
-    />
-    None
-  </label>
-  <label>
-    <input
-      type="radio"
-      name="portability"
-      value={FilterVisibility.ONLY}
-      bind:group={$portability}
-    />
-    Only
-  </label>
+
+  <span class="dib">
+    <label>
+      <input
+        type="radio"
+        name="portability"
+        value={FilterVisibility.ALLOW}
+        bind:group={$portability}
+      />
+      Allow
+    </label>
+    <label>
+      <input
+        type="radio"
+        name="portability"
+        value={FilterVisibility.NONE}
+        bind:group={$portability}
+      />
+      None
+    </label>
+    <label>
+      <input
+        type="radio"
+        name="portability"
+        value={FilterVisibility.ONLY}
+        bind:group={$portability}
+      />
+      Only
+    </label>
+  </span>
 </div>
 
 <style lang="scss">
@@ -83,6 +104,10 @@
   input:not([type]) {
     // the big text search bar
     width: 100%;
+  }
+
+  .dib {
+    display: inline-block;
   }
 
   .filter + .filter {
@@ -117,6 +142,7 @@
   }
 
   [title] {
+    cursor: help;
     text-decoration: underline dotted rgba($global-font-color, 0.5);
     text-underline-position: under;
   }
