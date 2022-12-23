@@ -2,7 +2,6 @@ import { derived, readable } from "svelte/store";
 import { fetchData, xml2json } from "../xml-to-json";
 import type { Game } from "../xml-to-json";
 import {
-  FilterVisibility,
   expansions,
   maxPlayers,
   minPlayers,

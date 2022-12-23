@@ -1,3 +1,5 @@
+import Xml from "./stores/static.xml";
+
 export interface Game {
   id: string;
   name: string;
@@ -28,7 +30,9 @@ export const fetchData = async (): Promise<Element> => {
       setTimeout(() => res(fetchData()), 3000);
     });
   } else {
-    return document.createElement("div");
+    console.warn("Fell back to static list");
+
+    return new DOMParser().parseFromString(Xml, "application/xml").documentElement;
   }
 };
 
